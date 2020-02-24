@@ -363,31 +363,28 @@ def SASearch():
 	nextNode = list()
 	parentNode = list()
 	nextNode.append(initialState)
-	for t in range(1000000):
-		T = schedule(t)
+	for t in range(1000000): #for t = 1 to ∞ do
+		T = schedule(t) #T ← schedule(t)
 		currentState = nextNode.pop(0)
-		if T == 0:
+		if T == 0: #if T = 0 then return current
 			return currentState
 		if currentState.isGoal():
 			return currentState
-		children = actions(currentState)
+		children = actions(currentState) 
 		for child in children:
 			if child not in parentNode:
 				chooseOne.insert(0, child)
 		num = random.randrange(0, len(chooseOne))
-		nextChild = chooseOne[num]
+		nextChild = chooseOne[num] # next ← a randomly selected successor of current
 		parentNode.clear()
-		# printSolution(currentState)
 		currentValue = calculateManhattan(currentState)
 		nextValue = calculateManhattan(nextChild)
-		deltaE = nextValue - currentValue
+		deltaE = nextValue - currentValue #ΔE ← next.VALUE – current.VALUE
 		func = math.exp(deltaE/T)
-		# print(func)
-		# print(currentValue)
-		if deltaE > 0:
+		if deltaE > 0: #if ΔE > 0 then current ← next
 			nextNode.append(nextChild)
 			parentNode.append(currentState)
-		else:
+		else: #else: current ← next only with probability e^(ΔE/T)
 			probability = random.uniform(0, 1)
 			if func > probability:
 				nextNode.append(nextChild)
