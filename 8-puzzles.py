@@ -53,299 +53,155 @@ def actions(currentState):
 	# If the boat is on side A
 	if currentState.first == 0:
 
-		newState = State(currentState.second, 
-                            0,
-                            currentState.third,
-                            currentState.fourth,
-                            currentState.fifth,
-                            currentState.sixth,
-                            currentState.seventh,
-                            currentState.eighth,
-                            currentState.nineth)
+		newState = State(currentState.second, 0, currentState.third,
+                            currentState.fourth, currentState.fifth, currentState.sixth,
+                            currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
 
-		newState = State(currentState.fourth,
-                            currentState.second,
-                            currentState.third,
-                            0,
-                            currentState.fifth,
-                            currentState.sixth,
-                            currentState.seventh,
-                            currentState.eighth,
-                            currentState.nineth)
+		newState = State(currentState.fourth, currentState.second, currentState.third,
+                            0, currentState.fifth, currentState.sixth,
+                            currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
 
 	elif currentState.second == 0:
-		newState = State(0, 
-                            currentState.first,
-                            currentState.third,
-                            currentState.fourth,
-                            currentState.fifth,
-                            currentState.sixth,
-                            currentState.seventh,
-                            currentState.eighth,
-                            currentState.nineth)
+		newState = State(0, currentState.first, currentState.third,
+                            currentState.fourth, currentState.fifth, currentState.sixth,
+                            currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
 
-		newState = State(currentState.first, 
-                            currentState.fifth,
-                            currentState.third,
-                            currentState.fourth,
-                            0,
-                            currentState.sixth,
-                            currentState.seventh,
-                            currentState.eighth,
-                            currentState.nineth)
+		newState = State(currentState.first, currentState.fifth, currentState.third,
+                            currentState.fourth, 0, currentState.sixth,
+                            currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
 
-		newState = State(currentState.first, 
-                            currentState.third,
-                            0,
-                            currentState.fourth,
-                            currentState.fifth,
-                            currentState.sixth,
-                            currentState.seventh,
-                            currentState.eighth,
-                            currentState.nineth)
+		newState = State(currentState.first, currentState.third, 0,
+                            currentState.fourth, currentState.fifth, currentState.sixth,
+                            currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
     
 	elif currentState.third == 0:
-		newState = State(currentState.first, 
-                            0,
-                            currentState.second,
-                            currentState.fourth,
-                            currentState.fifth,
-                            currentState.sixth,
-                            currentState.seventh,
-                            currentState.eighth,
-                            currentState.nineth)
+		newState = State(currentState.first, 0, currentState.second,
+                            currentState.fourth, currentState.fifth, currentState.sixth,
+                            currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
 
-		newState = State(currentState.first, 
-                            currentState.second,
-                            currentState.sixth,
-                            currentState.fourth,
-                            currentState.fifth,
-                            0,
-                            currentState.seventh,
-                            currentState.eighth,
-                            currentState.nineth)
+		newState = State(currentState.first, currentState.second, currentState.sixth,
+                            currentState.fourth, currentState.fifth, 0,
+                            currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
     
 	elif currentState.fourth == 0:
-		newState = State(0, 
-                            currentState.second,
-                            currentState.third,
-                            currentState.first,
-                            currentState.fifth,
-                            currentState.sixth,
-                            currentState.seventh,
-                            currentState.eighth,
-                            currentState.nineth)
+		newState = State(0, currentState.second, currentState.third,
+                            currentState.first, currentState.fifth, currentState.sixth,
+                            currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
 
-		newState = State(currentState.first, 
-                            currentState.second,
-                            currentState.third,
-                            currentState.fifth,
-                            0,
-                            currentState.sixth,
-                            currentState.seventh,
-                            currentState.eighth,
-                            currentState.nineth)
+		newState = State(currentState.first, currentState.second, currentState.third,
+                            currentState.fifth, 0, currentState.sixth,
+                            currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
 
-		newState = State(currentState.first, 
-                            currentState.second,
-                            currentState.third,
-                            currentState.seventh,
-                            currentState.fifth,
-                            currentState.sixth,
-                            0,
-                            currentState.eighth,
-                            currentState.nineth)
+		newState = State(currentState.first, currentState.second, currentState.third,
+                            currentState.seventh, currentState.fifth, currentState.sixth,
+                            0, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
     
 	elif currentState.fifth == 0:
-		newState = State(currentState.first, 
-                            0,
-                            currentState.third,
-                            currentState.fourth,
-                            currentState.second,
-                            currentState.sixth,
-                            currentState.seventh,
-                            currentState.eighth,
-                            currentState.nineth)
+		newState = State(currentState.first, 0, currentState.third,
+                            currentState.fourth, currentState.second, currentState.sixth,
+                            currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
 
-		newState = State(currentState.first, 
-                            currentState.second,
-                            currentState.third,
-                            0,
-                            currentState.fourth,
-                            currentState.sixth,
-                            currentState.seventh,
-                            currentState.eighth,
-                            currentState.nineth)
+		newState = State(currentState.first, currentState.second, currentState.third,
+                            0, currentState.fourth, currentState.sixth,
+                            currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
 
-		newState = State(currentState.first, 
-                            currentState.second,
-                            currentState.third,
-                            currentState.fourth,
-                            currentState.sixth,
-                            0,
-                            currentState.seventh,
-                            currentState.eighth,
-                            currentState.nineth)
+		newState = State(currentState.first, currentState.second, currentState.third,
+                            currentState.fourth, currentState.sixth, 0,
+                            currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
 
-		newState = State(currentState.first, 
-                            currentState.second,
-                            currentState.third,
-                            currentState.fourth,
-                            currentState.eighth,
-                            currentState.sixth,
-                            currentState.seventh,
-                            0,
-                            currentState.nineth)
+		newState = State(currentState.first, currentState.second, currentState.third,
+                            currentState.fourth, currentState.eighth, currentState.sixth,
+                            currentState.seventh, 0, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
     
 	elif currentState.sixth == 0:
-		newState = State(currentState.first, 
-                            currentState.second,
-                            0,
-                            currentState.fourth,
-                            currentState.fifth,
-                            currentState.third,
-                            currentState.seventh,
-                            currentState.eighth,
-                            currentState.nineth)
+		newState = State(currentState.first, currentState.second, 0,
+                            currentState.fourth, currentState.fifth, currentState.third,
+                            currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
 
-		newState = State(currentState.first, 
-                            currentState.second,
-                            currentState.third,
-                            currentState.fourth,
-                            0,
-                            currentState.fifth,
-                            currentState.seventh,
-                            currentState.eighth,
-                            currentState.nineth)
+		newState = State(currentState.first, currentState.second, currentState.third,
+                            currentState.fourth, 0, currentState.fifth,
+                            currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
 
-		newState = State(currentState.first, 
-                            currentState.second,
-                            currentState.third,
-                            currentState.fourth,
-                            currentState.fifth,
-                            currentState.nineth,
-                            currentState.seventh,
-                            currentState.eighth,
-                            0)
+		newState = State(currentState.first, currentState.second, currentState.third,
+                            currentState.fourth, currentState.fifth, currentState.nineth,
+                            currentState.seventh, currentState.eighth, 0)
 		newState.parent = currentState
 		children.append(newState)
     
 	elif currentState.seventh == 0:
-		newState = State(currentState.first, 
-                            currentState.second,
-                            currentState.third,
-                            0,
-                            currentState.fifth,
-                            currentState.sixth,
-                            currentState.fourth,
-                            currentState.eighth,
-                            currentState.nineth)
+		newState = State(currentState.first, currentState.second, currentState.third,
+                            0, currentState.fifth, currentState.sixth,
+                            currentState.fourth, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
 
-		newState = State(currentState.first, 
-                            currentState.second,
-                            currentState.third,
-                            currentState.fourth,
-                            currentState.fifth,
-                            currentState.sixth,
-                            currentState.eighth,
-                            0,
-                            currentState.nineth)
+		newState = State(currentState.first, currentState.second, currentState.third,
+                            currentState.fourth, currentState.fifth, currentState.sixth,
+                            currentState.eighth, 0, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
     
 	elif currentState.eighth == 0:
-		newState = State(currentState.first, 
-                            currentState.second,
-                            currentState.third,
-                            currentState.fourth,
-                            currentState.fifth,
-                            currentState.sixth,
-                            0,
-                            currentState.seventh,
-                            currentState.nineth)
+		newState = State(currentState.first, currentState.second, currentState.third,
+                            currentState.fourth, currentState.fifth, currentState.sixth,
+                            0, currentState.seventh, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
 
-		newState = State(currentState.first, 
-                            currentState.second,
-                            currentState.third,
-                            currentState.fourth,
-                            0,
-                            currentState.sixth,
-                            currentState.seventh,
-                            currentState.fifth,
-                            currentState.nineth)
+		newState = State(currentState.first, currentState.second, currentState.third,
+                            currentState.fourth, 0, currentState.sixth,
+                            currentState.seventh, currentState.fifth, currentState.nineth)
 		newState.parent = currentState
 		children.append(newState)
 
-		newState = State(currentState.first, 
-                            currentState.second,
-                            currentState.third,
-                            currentState.fourth,
-                            currentState.fifth,
-                            currentState.sixth,
-                            currentState.seventh,
-                            currentState.nineth,
-                            0)
+		newState = State(currentState.first, currentState.second, currentState.third,
+                            currentState.fourth, currentState.fifth, currentState.sixth,
+                            currentState.seventh, currentState.nineth, 0)
 		newState.parent = currentState
 		children.append(newState)
     
 	else:
-		newState = State(currentState.first, 
-                            currentState.second,
-                            currentState.third,
-                            currentState.fourth,
-                            currentState.fifth,
-                            0,
-                            currentState.seventh,
-                            currentState.eighth,
-                            currentState.sixth)
+		newState = State(currentState.first, currentState.second, currentState.third,
+                            currentState.fourth, currentState.fifth, 0,
+                            currentState.seventh, currentState.eighth, currentState.sixth)
 		newState.parent = currentState
 		children.append(newState)
 
-		newState = State(currentState.first, 
-                            currentState.second,
-                            currentState.third,
-                            currentState.fourth,
-                            currentState.fifth,
-                            currentState.sixth,
-                            currentState.seventh,
-                            0,
-                            currentState.eighth)
+		newState = State(currentState.first, currentState.second, currentState.third,
+                            currentState.fourth, currentState.fifth, currentState.sixth,
+                            currentState.seventh, 0, currentState.eighth)
 		newState.parent = currentState
 		children.append(newState)
 
@@ -353,9 +209,11 @@ def actions(currentState):
 
 ####################################################################################
 
-def schedule(t):
-    t = 99999 - t
-    return t
+def schedule(t):    # This is a linear schedule(t) function, which makes T reduced 
+                    # as time goes by
+    T = 99999 - t  # The number (e.g: 999999) here should equal to (the top range 
+                    # of t - 1), user can edit it on line 229.
+    return T
 
 def SASearch():
 	initialState = State(1,2,3,4,5,8,6,7,0)
@@ -364,29 +222,43 @@ def SASearch():
 	nextNode = list()   # Store the next node we gonna visit.
 	parentNode = list() # Store current node's parent node so that it will not be visit 
                         # again
+
 	nextNode.append(initialState)
 	printInitial(initialState, calculateManhattan(initialState))
-	for t in range(100000):     # for t = 1 to ∞ do
+
+	for t in range(1, 100000):      # for t = 1 to ∞ do
+                                    # This topper bound of range is for user to edit.
+                                    # While I tested it, t = 1 000 000 and
+                                    # T = 999 999 can ensure that we get an answer.
+                                    # (in schedule(t))
+                                    # (Although it will not iterate that many times,
+                                    # it will stop somewhere between )
 		T = schedule(t) # T ← schedule(t)
 		currentState = nextNode.pop(0)
+
 		if T == 0:      # if T = 0 then return current
 			print('T reached 0, did not get the solution.')
 			return currentState
+
 		if currentState.isGoal():   # If reach the goal, return and print solution
-			print('COOLdone')
+			print('Success!')
 			return currentState
+
 		children = actions(currentState)    # Get all possible states
+
 		for child in children:
 			if child not in parentNode:     # Make sure not to visit parent state
 				chooseOne.insert(0, child)
 		num = random.randrange(0, len(chooseOne))
 		nextChild = chooseOne[num] # next ← a randomly selected successor of current
 		parentNode.clear()
+
 		currentValue = calculateManhattan(currentState)
 		nextValue = calculateManhattan(nextChild)
 		
 		deltaE = nextValue - currentValue #ΔE ← next.VALUE – current.VALUE
 		func = math.exp(deltaE/T)
+
 		if deltaE > 0: #if ΔE > 0 then current ← next
 			nextNode.append(nextChild)
 			printState(nextChild, currentValue, nextValue)
@@ -406,6 +278,7 @@ def SASearch():
 				parentNode.append(currentState)
 			else:
 				nextNode.append(currentState) # if next node not accepted, do nothing, loop again
+
 		chooseOne.clear() #For choosing next child node next loop
 
 def calculateManhattan(currentState):
@@ -432,22 +305,11 @@ def calculateManhattan(currentState):
 
 def main():
 	# Find the solution
-    solution = SASearch()
-    print('done')
-	# Print the solution
-    # printSolution(solution)
-    # file.close() 
-
-
+    SASearch()
+    print('Done')
 
 def printState(solution,value,childValue):
-    # path = []
-    # path.append(solution)
-    # parent = solution.parent
-    file = open(r"C:\output.txt", "a")
-    # if solution.first == 1 and solution.second == 2 and solution.third == 3 and \
-    #     solution.fourth == 4 and solution.fifth == 5 and solution.sixth == 6 and \
-    #     solution.seventh == 7 and solution.eighth == 8:
+    file = open("output.txt", "a")
     if childValue == 0:
         file.writelines("Goal state: \n")
     else:
@@ -456,22 +318,20 @@ def printState(solution,value,childValue):
     file.writelines("[ " + str(solution.fourth) + " " + str(solution.fifth) + " " + str(solution.sixth) + " ] \n")
     if childValue >= value:
         file.writelines("[ " + str(solution.seventh) + " " + str(solution.eighth) + " " + str(solution.nineth) + " ]"\
-            + "(h=" + str(childValue) + ") \n")
-    else:
+            + "(h=" + str(-childValue) + ") \n")
+    else:   # if child value < current value, then it is a bad move
         file.writelines("[ " + str(solution.seventh) + " " + str(solution.eighth) + " " + str(solution.nineth) + " ]"\
-            + "(h=" + str(childValue) + ", BAD MOVE) \n")
+            + "(h=" + str(-childValue) + ", BAD MOVE) \n")
     file.close()
 
 def printInitial(solution, value):
-    file = open(r"C:\output.txt", "a")
+    file = open("output.txt", "a")
     file.writelines("Initial state: \n")
     file.writelines("[ " + str(solution.first) + " " + str(solution.second) + " " + str(solution.third) + " ] \n")
     file.writelines("[ " + str(solution.fourth) + " " + str(solution.fifth) + " " + str(solution.sixth) + " ] \n")
     file.writelines("[ " + str(solution.seventh) + " " + str(solution.eighth) + " " + str(solution.nineth) + " ]" \
-        + "(h=" + str(value) + ") \n")
+        + "(h=" + str(-value) + ") \n")
     file.close() 
-
-
 
 # Call main() to run it
 if __name__ == "__main__":
