@@ -1,6 +1,15 @@
 import random
 import math
 
+# Lab Assignment #4
+# 8-Puzzles Problem
+# 
+# AUCSC 460
+# Author: Jinzhe Li
+# Instructor: Mi-Young Kim
+# 
+# This Python program uses simulated annealing algorithm to find the solution.
+
 class State():
 	def __init__(self, first, second, third, fourth, fifth, sixth, seventh, eighth, nineth):
 		self.first = first
@@ -281,6 +290,8 @@ def SASearch():
 
 		chooseOne.clear() #For choosing next child node next loop
 
+####################################################################################
+
 def calculateManhattan(currentState):
     manhattanDict = 0
     if currentState.first != 0:
@@ -302,6 +313,8 @@ def calculateManhattan(currentState):
     if currentState.nineth != 0:
         manhattanDict -= abs(((currentState.nineth-1)%3) - 2) + abs((currentState.nineth-1)//3 - 2)
     return manhattanDict
+
+####################################################################################
 
 def main():
 	# Find the solution
@@ -332,6 +345,8 @@ def printInitial(solution, value):
     file.writelines("[ " + str(solution.seventh) + " " + str(solution.eighth) + " " + str(solution.nineth) + " ]" \
         + "(h=" + str(-value) + ") \n")
     file.close() 
+
+####################################################################################
 
 # Call main() to run it
 if __name__ == "__main__":
