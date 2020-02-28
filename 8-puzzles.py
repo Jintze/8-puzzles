@@ -1,5 +1,6 @@
 import random
 import math
+import sys
 
 # Lab Assignment #4
 # 8-Puzzles Problem
@@ -28,15 +29,15 @@ class State():
 
 	# Decide if it is goal state
 	def isGoal(self):
-		if self.first == 1 \
-            and self.second == 2 \
-            and self.third == 3 \
-            and self.fourth == 4 \
-            and self.fifth == 5 \
-            and self.sixth == 6 \
-            and self.seventh == 7 \
-            and self.eighth == 8 \
-            and self.nineth == 0:
+		if self.first == 0 \
+            and self.second == 1 \
+            and self.third == 2 \
+            and self.fourth == 3 \
+            and self.fifth == 4 \
+            and self.sixth == 5 \
+            and self.seventh == 6 \
+            and self.eighth == 7 \
+            and self.nineth == 8:
 			return True
 		else:
 			return False
@@ -300,11 +301,6 @@ def actions(currentState):
 
 ####################################################################################
 
-def schedule(t):    # This is a linear schedule(t) function, which makes T reduced 
-                    # as time goes by
-    T = 999999 - t  # The number (e.g: 999999) here should equal to (the top range 
-                    # of t - 1), user can edit it on line 229.
-    return T
 
 def AStarSearch():
 	# userInput = list()
@@ -317,143 +313,201 @@ def AStarSearch():
 	# initialState = State(userInput[0],userInput[1],userInput[2],
 	# 					userInput[3],userInput[4],userInput[5],
 	# 					userInput[6],userInput[7],userInput[8])
-	initialState = State(0,1,2,3,4,5,6,7,8)
+	# initialState = State(1,2,3,4,0,5,6,7,8)
+	initialState = State(2,1,0,3,4,5,6,7,8)
+	# initialState = State(2,3,6,1,5,0,4,7,8)
 	openList = list()
 	closeList = list()
-	# costList = list()
-	# path = []
-	# gn = int()
-	# hn = int()
 	openList.append(initialState)
-	# print(openList)
-	# print(type(openList))
-	# print(openList[0])
+	moveCount = 0
+	if initialState.isGoal():
+		print('What you entered is the goal!')
+		sys.exit()
+	print("Output:")
+	print("(Initial)")
+	printState(initialState)
 	while openList:
-		# if len(openList) == 0:
-		# min = 0
 		min = openList[0].fncost
 		currentMin = openList[0]
 		for i in range(0, len(openList)):
-			# currentIndex = 0
 			if openList[i].fncost < min:
 				min = openList[i].fncost
 				currentMin = openList[i]
-				currentIndex = i
-		# if currentMin:
 		openList.remove(currentMin)
-		closeList.append(currentMin)
-		if currentMin.isGoal():
-			print('Success!')
-			return currentMin
-		else:
-			children = actions(currentMin)
-			for child in children:
-				if child not in closeList:
-					if child.isGoal():
-						print('Success!')
-						printTest(child)
-						return child
-					elif child not in openList:
-						openList.append(child)
-
-
-def printTest(solution):
-	print("[ " + str(solution.first) + " " + str(solution.second) + " " + str(solution.third) + " ] \n")
-	print("[ " + str(solution.fourth) + " " + str(solution.fifth) + " " + str(solution.sixth) + " ] \n")
-	print("[ " + str(solution.seventh) + " " + str(solution.eighth) + " " + str(solution.nineth) + " ]")
-
-
-
-
-
-def SASearch():
-	initialState = State(1,2,3,4,5,6,7,0,8)
-	chooseOne = list()  # For later use of storing all possible child node and pick one 
-                        # of them randomly
-	nextNode = list()   # Store the next node we gonna visit.
-	parentNode = list() # Store current node's parent node so that it will not be visit 
-                        # again
-
-	nextNode.append(initialState)
-	printInitial(initialState, calculateManhattan(initialState))
-
-	for t in range(1, 1000000):      # for t = 1 to ∞ do
-                                    # This topper bound of range is for user to edit.
-                                    # While I tested it, t = 1 000 000 and
-                                    # T = 999 999 can ensure that we get an answer.
-                                    # (in schedule(t))
-                                    # (Although it will not iterate that many times,
-                                    # it will stop somewhere between )
-		T = schedule(t) # T ← schedule(t)
-		currentState = nextNode.pop(0)
-
-		if T == 0:      # if T = 0 then return current
-			print('T reached 0, did not get the solution.')
-			return currentState
-
-		if currentState.isGoal():   # If reach the goal, return and print solution
-			print('Success!')
-			return currentState
-
-		children = actions(currentState)    # Get all possible states
-
+		# if len(closeList) > 0:
+		closeList.insert(0,currentMin)
+		parent = currentMin.parent
+		if currentMin != initialState:
+			printNextInfo(moveCount, currentMin, parent)
+			printState(currentMin)
+		children = actions(currentMin)
+		moveCount +=1
 		for child in children:
-			if child not in parentNode:     # Make sure not to visit parent state
-				chooseOne.insert(0, child)
-		num = random.randrange(0, len(chooseOne))
-		nextChild = chooseOne[num] # next ← a randomly selected successor of current
-		parentNode.clear()
+			if child not in closeList:
+				
+				if child.isGoal():
+					printNextInfo(moveCount, child, currentMin)
+					printState(child)
+					printMoveNum(moveCount)
+					return child
+				elif child not in openList:
+					openList.append(child)
 
-		currentValue = calculateManhattan(currentState)
-		nextValue = calculateManhattan(nextChild)
-		
-		deltaE = nextValue - currentValue #ΔE ← next.VALUE – current.VALUE
-		func = math.exp(deltaE/T)
 
-		if deltaE > 0: #if ΔE > 0 then current ← next
-			nextNode.append(nextChild)
-			printState(nextChild, currentValue, nextValue)
-			parentNode.append(currentState)
-		else: # else: current ← next only with probability e^(ΔE/T)
+def printMoveNum(count):
+	print("===========================")
+	print("Total number of moves: " + str(count))
+	print("===========================")
 
-            # Since the way I set up schedule(t), my T's lowest value before it reach 0 is 1,
-            # thus the range of e^(ΔE/T)'s value is [math.exp(-1), 1].
-            # I believe if I choose random number from math.exp(-1) to 1, it works the best
-            # when we consider "next with probability e^(ΔE/T)" .
-            # This is, when time goes by, it is less possible to accept next ΔE < 0 node.
-			probability = random.uniform(math.exp(-1), 1)
+def printNextInfo(count, nextState, lastState):
+	oldList = list()
+	oldList.append(str(lastState.first))
+	oldList.append(str(lastState.second))
+	oldList.append(str(lastState.third))
+	oldList.append(str(lastState.fourth))
+	oldList.append(str(lastState.fifth))
+	oldList.append(str(lastState.sixth))
+	oldList.append(str(lastState.seventh))
+	oldList.append(str(lastState.eighth))
+	oldList.append(str(lastState.nineth))
 
-			if func > probability: # if next node accepted
-				nextNode.append(nextChild)
-				printState(nextChild, currentValue, nextValue)
-				parentNode.append(currentState)
-			else:
-				nextNode.append(currentState) # if next node not accepted, do nothing, loop again
+	newList = list()
+	newList.append(str(nextState.first))
+	newList.append(str(nextState.second))
+	newList.append(str(nextState.third))
+	newList.append(str(nextState.fourth))
+	newList.append(str(nextState.fifth))
+	newList.append(str(nextState.sixth))
+	newList.append(str(nextState.seventh))
+	newList.append(str(nextState.eighth))
+	newList.append(str(nextState.nineth))
 
-		chooseOne.clear() #For choosing next child node next loop
+	lastZeroIndex = 0
+	nextZeroIndex = 0
+	status = str
+
+	for i in range(0,9):
+		if oldList[i] == '0':
+			lastZeroIndex = i
+		if newList[i] == '0':
+			nextZeroIndex = i
+	
+	if ((nextZeroIndex//3) - (lastZeroIndex//3)) == 1:
+		status = "down"
+	elif ((nextZeroIndex//3) - (lastZeroIndex//3)) == -1:
+		status = "up"
+	elif ((nextZeroIndex%3) - (lastZeroIndex%3)) == 1:
+		status = "right"
+	else:
+		status = "left"
+	
+	if count == 1:
+		print(str(count) + "st move" + " (move blank tail " + status + "):")
+	elif count%10 == 2:
+		print(str(count) + "nd move" + " (move blank tail " + status + "):")
+	elif count%10 == 3:
+		print(str(count) + "rd move" + " (move blank tail " + status + "):")
+	else:
+		print(str(count) + "th move" + " (move blank tail " + status + "):")
+
+def printState(solution):
+		printList = list()
+		printList.append(str(solution.first))
+		printList.append(str(solution.second))
+		printList.append(str(solution.third))
+		printList.append(str(solution.fourth))
+		printList.append(str(solution.fifth))
+		printList.append(str(solution.sixth))
+		printList.append(str(solution.seventh))
+		printList.append(str(solution.eighth))
+		printList.append(str(solution.nineth))
+		for i in range(0,9):
+			if printList[i] == '0':
+				printList[i] = ' '
+		for i in range(0,9,3):
+			print(printList[i] + " " + printList[i+1] + " " + printList[i+2])
+		print("")
+
+# def printMove(lastState, nextState):
+# 	oldList = list()
+# 	oldList.append(str(lastState.first))
+# 	oldList.append(str(lastState.second))
+# 	oldList.append(str(lastState.third))
+# 	oldList.append(str(lastState.fourth))
+# 	oldList.append(str(lastState.fifth))
+# 	oldList.append(str(lastState.sixth))
+# 	oldList.append(str(lastState.seventh))
+# 	oldList.append(str(lastState.eighth))
+# 	oldList.append(str(lastState.nineth))
+
+# 	newList = list()
+# 	newList.append(str(nextState.first))
+# 	newList.append(str(nextState.second))
+# 	newList.append(str(nextState.third))
+# 	newList.append(str(nextState.fourth))
+# 	newList.append(str(nextState.fifth))
+# 	newList.append(str(nextState.sixth))
+# 	newList.append(str(nextState.seventh))
+# 	newList.append(str(nextState.eighth))
+# 	newList.append(str(nextState.nineth))
+
+# 	lastZeroIndex = 0
+# 	nextZeroIndex = 0
+# 	status = str
+
+# 	for i in range(0,9):
+# 		if oldList[i] == 0:
+# 			lastZeroIndex = i
+# 		if newList[i] == 0:
+# 			nextZeroIndex = i
+	
+# 	if ((nextZeroIndex//3) - (lastZeroIndex//3)) == 1:
+# 		status = "down"
+# 	elif ((nextZeroIndex//3) - (lastZeroIndex//3)) == -1:
+# 		status = "up"
+# 	elif ((nextZeroIndex%3) - (lastZeroIndex%3)) == 1:
+# 		status = "right"
+# 	else:
+# 		status = "left"
+
+	
+
+
+# def 
+# 		path = []
+# 		path.append(solution)
+# 		parent = solution.parent
+# 		while parent:
+# 			path.append(parent)
+# 			parent = parent.parent
+# 		print("It takes " + str(len(path)) + " moves")
+
+# def displayNext(solution):
+	
+	
 
 ####################################################################################
 
 def calculateManhattan(currentState):
     manhattanDict = 0
     if currentState.first != 0:
-        manhattanDict -= abs(((currentState.first-1)%3) - 0) + abs((currentState.first-1)//3 - 0)
+        manhattanDict -= abs(((currentState.first)%3) - 0) + abs((currentState.first-1)//3 - 0)
     if currentState.second != 0:
-        manhattanDict -= abs(((currentState.second-1)%3) - 1) + abs((currentState.second-1)//3 - 0)
+        manhattanDict -= abs(((currentState.second)%3) - 1) + abs((currentState.second-1)//3 - 0)
     if currentState.third != 0:
-        manhattanDict -= abs(((currentState.third-1)%3) - 2) + abs((currentState.third-1)//3 - 0)
+        manhattanDict -= abs(((currentState.third)%3) - 2) + abs((currentState.third-1)//3 - 0)
     if currentState.fourth != 0:
-        manhattanDict -= abs(((currentState.fourth-1)%3) - 0) + abs((currentState.fourth-1)//3 - 1)
+        manhattanDict -= abs(((currentState.fourth)%3) - 0) + abs((currentState.fourth-1)//3 - 1)
     if currentState.fifth != 0:
-        manhattanDict -= abs(((currentState.fifth-1)%3) - 1) + abs((currentState.fifth-1)//3 - 1)
+        manhattanDict -= abs(((currentState.fifth)%3) - 1) + abs((currentState.fifth-1)//3 - 1)
     if currentState.sixth != 0:
-        manhattanDict -= abs(((currentState.sixth-1)%3) - 2) + abs((currentState.sixth-1)//3 - 1)
+        manhattanDict -= abs(((currentState.sixth)%3) - 2) + abs((currentState.sixth-1)//3 - 1)
     if currentState.seventh != 0:
-        manhattanDict -= abs(((currentState.seventh-1)%3) - 0) + abs((currentState.seventh-1)//3 - 2)
+        manhattanDict -= abs(((currentState.seventh)%3) - 0) + abs((currentState.seventh-1)//3 - 2)
     if currentState.eighth != 0:
-        manhattanDict -= abs(((currentState.eighth-1)%3) - 1) + abs((currentState.eighth-1)//3 - 2)
+        manhattanDict -= abs(((currentState.eighth)%3) - 1) + abs((currentState.eighth-1)//3 - 2)
     if currentState.nineth != 0:
-        manhattanDict -= abs(((currentState.nineth-1)%3) - 2) + abs((currentState.nineth-1)//3 - 2)
+        manhattanDict -= abs(((currentState.nineth)%3) - 2) + abs((currentState.nineth-1)//3 - 2)
     return manhattanDict
 
 ####################################################################################
@@ -462,32 +516,6 @@ def main():
 	# Find the solution
     # SASearch()
 	AStarSearch()
-	print('Done')
-
-def printState(solution,value,childValue):
-    file = open("output.txt", "a")
-    if childValue == 0:
-        file.writelines("Goal state: \n")
-    else:
-        file.writelines("Next: \n")
-    file.writelines("[ " + str(solution.first) + " " + str(solution.second) + " " + str(solution.third) + " ] \n")
-    file.writelines("[ " + str(solution.fourth) + " " + str(solution.fifth) + " " + str(solution.sixth) + " ] \n")
-    if childValue >= value:
-        file.writelines("[ " + str(solution.seventh) + " " + str(solution.eighth) + " " + str(solution.nineth) + " ]"\
-            + "(h=" + str(-childValue) + ") \n")
-    else:   # if child value < current value, then it is a bad move
-        file.writelines("[ " + str(solution.seventh) + " " + str(solution.eighth) + " " + str(solution.nineth) + " ]"\
-            + "(h=" + str(-childValue) + ", BAD MOVE) \n")
-    file.close()
-
-def printInitial(solution, value):
-    file = open("output.txt", "a")
-    file.writelines("Initial state: \n")
-    file.writelines("[ " + str(solution.first) + " " + str(solution.second) + " " + str(solution.third) + " ] \n")
-    file.writelines("[ " + str(solution.fourth) + " " + str(solution.fifth) + " " + str(solution.sixth) + " ] \n")
-    file.writelines("[ " + str(solution.seventh) + " " + str(solution.eighth) + " " + str(solution.nineth) + " ]" \
-        + "(h=" + str(-value) + ") \n")
-    file.close() 
 
 ####################################################################################
 
