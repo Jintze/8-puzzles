@@ -22,6 +22,9 @@ class State():
 		self.eighth = eighth
 		self.nineth = nineth
 		self.parent = None
+		self.gncost = 0
+		self.hncost = 0
+		self.fncost = 0
 
 	# Decide if it is goal state
 	def isGoal(self):
@@ -56,6 +59,12 @@ class State():
 
 ####################################################################################
 
+# def addActions(currentState):
+# 	newState.parent = currentState
+# 	newState.gncost += 1
+# 	newState.hncost = calculateManhattan(newState)
+# 	children.append(newState)
+
 def actions(currentState):
 	children = []
 
@@ -66,12 +75,19 @@ def actions(currentState):
                             currentState.fourth, currentState.fifth, currentState.sixth,
                             currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
+		
 
 		newState = State(currentState.fourth, currentState.second, currentState.third,
                             0, currentState.fifth, currentState.sixth,
                             currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
 
 	elif currentState.second == 0:
@@ -79,18 +95,27 @@ def actions(currentState):
                             currentState.fourth, currentState.fifth, currentState.sixth,
                             currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
 
 		newState = State(currentState.first, currentState.fifth, currentState.third,
                             currentState.fourth, 0, currentState.sixth,
                             currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
 
 		newState = State(currentState.first, currentState.third, 0,
                             currentState.fourth, currentState.fifth, currentState.sixth,
                             currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
     
 	elif currentState.third == 0:
@@ -98,12 +123,18 @@ def actions(currentState):
                             currentState.fourth, currentState.fifth, currentState.sixth,
                             currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
 
 		newState = State(currentState.first, currentState.second, currentState.sixth,
                             currentState.fourth, currentState.fifth, 0,
                             currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
     
 	elif currentState.fourth == 0:
@@ -111,18 +142,27 @@ def actions(currentState):
                             currentState.first, currentState.fifth, currentState.sixth,
                             currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
 
 		newState = State(currentState.first, currentState.second, currentState.third,
                             currentState.fifth, 0, currentState.sixth,
                             currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
 
 		newState = State(currentState.first, currentState.second, currentState.third,
                             currentState.seventh, currentState.fifth, currentState.sixth,
                             0, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
     
 	elif currentState.fifth == 0:
@@ -130,24 +170,36 @@ def actions(currentState):
                             currentState.fourth, currentState.second, currentState.sixth,
                             currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
 
 		newState = State(currentState.first, currentState.second, currentState.third,
                             0, currentState.fourth, currentState.sixth,
                             currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
 
 		newState = State(currentState.first, currentState.second, currentState.third,
                             currentState.fourth, currentState.sixth, 0,
                             currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
 
 		newState = State(currentState.first, currentState.second, currentState.third,
                             currentState.fourth, currentState.eighth, currentState.sixth,
                             currentState.seventh, 0, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
     
 	elif currentState.sixth == 0:
@@ -155,18 +207,27 @@ def actions(currentState):
                             currentState.fourth, currentState.fifth, currentState.third,
                             currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
 
 		newState = State(currentState.first, currentState.second, currentState.third,
                             currentState.fourth, 0, currentState.fifth,
                             currentState.seventh, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
 
 		newState = State(currentState.first, currentState.second, currentState.third,
                             currentState.fourth, currentState.fifth, currentState.nineth,
                             currentState.seventh, currentState.eighth, 0)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
     
 	elif currentState.seventh == 0:
@@ -174,12 +235,18 @@ def actions(currentState):
                             0, currentState.fifth, currentState.sixth,
                             currentState.fourth, currentState.eighth, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
 
 		newState = State(currentState.first, currentState.second, currentState.third,
                             currentState.fourth, currentState.fifth, currentState.sixth,
                             currentState.eighth, 0, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
     
 	elif currentState.eighth == 0:
@@ -187,18 +254,27 @@ def actions(currentState):
                             currentState.fourth, currentState.fifth, currentState.sixth,
                             0, currentState.seventh, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
 
 		newState = State(currentState.first, currentState.second, currentState.third,
                             currentState.fourth, 0, currentState.sixth,
                             currentState.seventh, currentState.fifth, currentState.nineth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
 
 		newState = State(currentState.first, currentState.second, currentState.third,
                             currentState.fourth, currentState.fifth, currentState.sixth,
                             currentState.seventh, currentState.nineth, 0)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
     
 	else:
@@ -206,12 +282,18 @@ def actions(currentState):
                             currentState.fourth, currentState.fifth, 0,
                             currentState.seventh, currentState.eighth, currentState.sixth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
 
 		newState = State(currentState.first, currentState.second, currentState.third,
                             currentState.fourth, currentState.fifth, currentState.sixth,
                             currentState.seventh, 0, currentState.eighth)
 		newState.parent = currentState
+		newState.gncost += 1
+		newState.hncost = calculateManhattan(newState)
+		newState.fncost = newState.gncost - newState.hncost
 		children.append(newState)
 
 	return children
@@ -220,12 +302,72 @@ def actions(currentState):
 
 def schedule(t):    # This is a linear schedule(t) function, which makes T reduced 
                     # as time goes by
-    T = 99999 - t  # The number (e.g: 999999) here should equal to (the top range 
+    T = 999999 - t  # The number (e.g: 999999) here should equal to (the top range 
                     # of t - 1), user can edit it on line 229.
     return T
 
+def AStarSearch():
+	# userInput = list()
+	# for i in range(1, 4):
+	# 	for j in range(1, 4):
+	# 		print("input column " + str(i) + ", row " + str(j) + "'s number:")
+	# 		currInput = int(input())
+	# 		userInput.append(currInput)
+	# userInput = tuple(userInput)
+	# initialState = State(userInput[0],userInput[1],userInput[2],
+	# 					userInput[3],userInput[4],userInput[5],
+	# 					userInput[6],userInput[7],userInput[8])
+	initialState = State(0,1,2,3,4,5,6,7,8)
+	openList = list()
+	closeList = list()
+	# costList = list()
+	# path = []
+	# gn = int()
+	# hn = int()
+	openList.append(initialState)
+	# print(openList)
+	# print(type(openList))
+	# print(openList[0])
+	while openList:
+		# if len(openList) == 0:
+		# min = 0
+		min = openList[0].fncost
+		currentMin = openList[0]
+		for i in range(0, len(openList)):
+			# currentIndex = 0
+			if openList[i].fncost < min:
+				min = openList[i].fncost
+				currentMin = openList[i]
+				currentIndex = i
+		# if currentMin:
+		openList.remove(currentMin)
+		closeList.append(currentMin)
+		if currentMin.isGoal():
+			print('Success!')
+			return currentMin
+		else:
+			children = actions(currentMin)
+			for child in children:
+				if child not in closeList:
+					if child.isGoal():
+						print('Success!')
+						printTest(child)
+						return child
+					elif child not in openList:
+						openList.append(child)
+
+
+def printTest(solution):
+	print("[ " + str(solution.first) + " " + str(solution.second) + " " + str(solution.third) + " ] \n")
+	print("[ " + str(solution.fourth) + " " + str(solution.fifth) + " " + str(solution.sixth) + " ] \n")
+	print("[ " + str(solution.seventh) + " " + str(solution.eighth) + " " + str(solution.nineth) + " ]")
+
+
+
+
+
 def SASearch():
-	initialState = State(1,2,3,4,5,8,6,7,0)
+	initialState = State(1,2,3,4,5,6,7,0,8)
 	chooseOne = list()  # For later use of storing all possible child node and pick one 
                         # of them randomly
 	nextNode = list()   # Store the next node we gonna visit.
@@ -235,7 +377,7 @@ def SASearch():
 	nextNode.append(initialState)
 	printInitial(initialState, calculateManhattan(initialState))
 
-	for t in range(1, 100000):      # for t = 1 to ∞ do
+	for t in range(1, 1000000):      # for t = 1 to ∞ do
                                     # This topper bound of range is for user to edit.
                                     # While I tested it, t = 1 000 000 and
                                     # T = 999 999 can ensure that we get an answer.
@@ -318,8 +460,9 @@ def calculateManhattan(currentState):
 
 def main():
 	# Find the solution
-    SASearch()
-    print('Done')
+    # SASearch()
+	AStarSearch()
+	print('Done')
 
 def printState(solution,value,childValue):
     file = open("output.txt", "a")
