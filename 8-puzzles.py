@@ -12,6 +12,7 @@ import sys
 # This Python program uses A* algorithm to find the solution.
 
 ####################################################################################
+
 # Define the state
 class State():
 	def __init__(self, first, second, third, fourth, fifth, sixth, seventh, eighth, nineth):
@@ -234,6 +235,7 @@ def actions(currentState):
 	return children
 
 ####################################################################################
+
 # A* search.
 # The number of input number must be in total of 9, from 0 to 8,
 # break with space, and the there are 3 rows for 9 numbers,
@@ -242,7 +244,6 @@ def actions(currentState):
 #		4 3 5
 #		6 7 8
 # This algorithm calculate the f(n) value for each move and pick the lowest one among all.
-
 def AStarSearch():
 	# Input
 	print("Enter 9 numbers (including 0): ")
@@ -381,6 +382,7 @@ def printAll(solution):
 	printMoveNum(len(path) - 1)
 
 ####################################################################################
+
 # Calculate manhattan distance.
 def calculateManhattan(currentState):
     manhattanDict = 0
